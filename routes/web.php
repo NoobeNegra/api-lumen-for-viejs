@@ -31,7 +31,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('tool', ['uses' => 'ToolController@create']);
     $router->put('tool/{id}', ['uses' => 'ToolController@update']);
 
-    $router->get('user/{id}',  ['uses' => 'UserController@showOneTool']);
+    $router->get('user/{id}',  ['uses' => 'UserController@showOneUser']);
     $router->post('user', ['uses' => 'UserController@create']);
     $router->put('user/{id}', ['uses' => 'UserController@update']);
 });

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Tool;
+use App\User;
+use App\Comment;
+use App\Exchange;
 use Illuminate\Http\Request;
 
 class ToolController extends Controller
@@ -15,7 +18,11 @@ class ToolController extends Controller
 
     public function showOneTool($id)
     {
-        return response()->json(Tool::find($id));
+        $tool = Tool::find($id)->toArray();
+        $tool['user'] = User::find($tool['user_id']);
+        $tool['comments'] = Comment::where('object_id', $tool['id'])->where('model_id', 2);
+        $tool['exchanges'] = Exchange::where('tool_id', $tool['id']);
+        return response()->json($tool);
     }
 
     public function create(Request $request)
